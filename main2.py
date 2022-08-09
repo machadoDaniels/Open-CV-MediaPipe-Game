@@ -68,8 +68,16 @@ with mp_pose1.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.2) as
         image2 = cv2.cvtColor(image2, cv2.COLOR_RGB2BGR)
 
         # Extract landmarks
-        landmarks1 = results2.pose_landmarks.landmark
-        landmarks2 = results2.pose_landmarks.landmark
+        try:
+            landmarks2 = results2.pose_landmarks.landmark
+        except:
+            pass
+
+        try:
+            landmarks1 = results1.pose_landmarks.landmark
+        except:
+            pass
+
 
         # Render detections
         mp_drawing1.draw_landmarks(image1, results1.pose_landmarks, mp_pose1.POSE_CONNECTIONS,
@@ -84,14 +92,18 @@ with mp_pose1.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.2) as
         keypoints_movel1 = []
         keypoints_movel2 = []
 
-        if motion_detection(keypoints1, keypoints_movel1, landmarks1) is True:
-             print('O JOGADOR 1 PERDEU!!')
+        try:
+            if motion_detection(keypoints1, keypoints_movel1, landmarks1) is True:
+                print('O JOGADOR 1 PERDEU!!')
+        except:
+            pass
 
-        if motion_detection(keypoints2, keypoints_movel2, landmarks2) is True:
-            print('O JOGADOR 2 PERDEU!!')
+        try:
+            if motion_detection(keypoints2, keypoints_movel2, landmarks2) is True:
+                print('O JOGADOR 2 PERDEU!!')
+        except:
+            pass
 
-
-        sleep(0.5)
         cv2.imshow('Mediapipe Feed1', image1)
         cv2.imshow('Mediapipe Feed2', image2)
         if cv2.waitKey(10) & 0xFF == ord('q'):

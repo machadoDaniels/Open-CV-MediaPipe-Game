@@ -69,7 +69,7 @@ with mp_pose1.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.2) as
                         })
         else:
             for c in range(0, len(keypoints2)):
-                if keypoints2[c]['X'] - 0.08 < keypoints_movel2[c]['X'] < keypoints2[c]['X'] + 0.08 and \
+                if keypoints2[c]['X'] - 0.08 < keypoints_movel2[c]['X'] < keyqpoints2[c]['X'] + 0.08 and \
                         keypoints2[c]['Y'] - 0.1 < keypoints_movel2[c]['Y'] < keypoints2[c]['Y'] + 0.1 and \
                         keypoints2[c]['Z'] - 0.4 < keypoints_movel2[c]['Z'] < keypoints2[c]['Z'] + 0.4:
                     keypoints2[c]['X'] = keypoints_movel2[c]['X']
@@ -80,9 +80,8 @@ with mp_pose1.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.2) as
 
         if sair2 is True:
             print('O JOGADOR 2 PERDEU!!')
-            break
 
-        sleep(0.3)
+
         cv2.imshow('Mediapipe Feed1', image1)
         cv2.imshow('Mediapipe Feed2', image2)
         if cv2.waitKey(10) & 0xFF == ord('q'):
